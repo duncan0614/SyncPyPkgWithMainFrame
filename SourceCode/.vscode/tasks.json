@@ -1,0 +1,58 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build exe",
+            "type": "process",
+            "command": "pyinstaller",
+            "args": [
+                // "--hidden-import",
+                // "pywintypes",
+                // "--add-binary",
+                // "*.dll;.",
+                "-F",
+                "Program.py",
+                "-n",
+                "SyncPyModuleTool",
+                "--clean",
+                "--noconsole",
+                "--key",
+                "SINBON EMS"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "C3.Clean exe",
+            "type": "shell",
+            "command": "rmdir /s/q log dist build & del *.spec",
+            "args": [
+                ""
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Clean cache",
+            "type": "process",
+            "command": "python",
+            "args": [
+                "-Bc",
+                "import pathlib; [p.rmdir() for p in pathlib.Path('.').rglob('__pycache__')]"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
